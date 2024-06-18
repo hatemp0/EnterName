@@ -90,7 +90,8 @@
             if (event.key === 'Enter') {
                 if (this.value.toLowerCase().trim() === 'anja') { 
                     this.value = '';
-                    let image = 'images/heart.png'
+                    this.blur();
+                    let image = 'images/heart.png';
                     for(let i = 0; i<12; i++){
                             let delnigga = await delay(210);
                             for(let j=0;j<30;j++){
