@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unos imena</title>
+    <style>
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes floatUp {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(-250vw);
+            }
+        }
+        body,
+        html {
+            height: 100%;
+            margin: 0px;
+            overflow: hidden;
+        }
+        .container {
+            margin-top: 30%;
+            margin-left: auto;
+            margin-right: auto;
+            width: 300px;
+            text-align: center;
+        }
+        #myInput {
+            width: 70%;
+            padding: 10px;
+            font-size: 20px;
+            border-color: rgb(255, 171, 185);
+        }
+        
+
+        .floating-img {
+            position: absolute;
+            will-change: transform;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <input type="text" id="myInput" placeholder="Enter your name">
+    </div>
+
+    <script>
+        const delay = (delayInms) => {
+            return new Promise(resolve => setTimeout(resolve, delayInms));
+        };
+
+        function random(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+       const transition = ['ease-in', 'ease-out', 'linear', 'ease', 'ease-in-out'];
+        function spawnImage(image) {
+            var img = document.createElement('img');
+            img.src = image;
+            img.style.position = 'absolute';
+
+            img.style.width = random(50,150) + 'px';
+            img.style.top = random(parseInt(img.style.width) + 540, window.innerHeight) + 'px';
+
+            img.style.left = random(-50, window.innerWidth) + 'px';
+
+            img.style.opacity = 0;
+
+            let ani = transition[Math.floor(random(0,4))];
+            img.style.animation = `fadeIn 0.5s ease-in forwards, floatUp 2.7s ${ani} forwards`;
+            document.body.appendChild(img);
+        }
+       
+        document.getElementById('myInput').addEventListener('keypress', async function (event) {
+            if (event.key === 'Enter') {
+                if (this.value.toLowerCase().trim() === 'anja') { 
+                    this.value = '';
+                    let image = 'images/heart.png'
+                    for(let i = 0; i<12; i++){
+                            let delnigga = await delay(210);
+                            for(let j=0;j<30;j++){
+                                spawnImage(image);
+                            }
+                        
+                    }
+                }
+                else {
+                    this.value = '';
+                    image = 'images/thumbs.png';
+                    spawnImage(image);
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>
